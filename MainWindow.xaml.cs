@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Printing;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -121,7 +122,87 @@ namespace logcalc
 
         private void CheckAriButton_Click(object sender, RoutedEventArgs e)
         {
-            ariResult.Text = ariProgressTextBox.Text;
+            try
+            {
+                List<(string, int)> sequence = ParseInput(ariProgressTextBox.Text);
+                string tmp = "";
+                foreach(var data in sequence)
+                {
+                    tmp += $"{data.Item1}={data.Item2}, ";  
+                }
+                tmp += $"\n{MonotonicityOfArray(sequence)}";
+                ariResult.Text = tmp;
+            }catch (Exception ex) { MessageBox.Show(ex.ToString(), "You Were wrong, and this is why"); }
+        }
+
+        static List<(string, int)> ParseInput(string input)
+        {
+            List<(string, int)> dataList = new List<(string, int)>();
+
+            input = Regex.Replace(input, @"\s", "");
+            string[] pairs = input.Split(',');
+
+            foreach (string pair in pairs)
+            {
+                string[] parts = pair.Split('=');
+
+                if (parts.Length == 2 && int.TryParse(parts[1], out int value))
+                {
+                    dataList.Add((parts[0], value));
+                }
+                else
+                {
+                   MessageBox.Show($"Incorrect format: {pair}.", "You Were wrong, and this is why");
+                }
+            }
+
+            return dataList;
+        }
+
+        static string MonotonicityOfArray(List<(string, int)> dataList)
+        {
+            dataList.Sort((x, y) => string.Compare(x.Item1, y.Item1));
+
+            int prevValue = dataList[0].Item2;
+            bool increasing = true;
+            bool decreasing = true;
+            bool constant = true;
+
+            for (int i = 1; i < dataList.Count; i++)
+            {
+                if (dataList[i].Item2 != prevValue)
+                {
+                    constant = false;
+                }
+                if (dataList[i].Item2 > prevValue)
+                {
+                    decreasing = false;
+                }
+                else if (dataList[i].Item2 < prevValue)
+                {
+                    increasing = false;
+                }
+
+                prevValue = dataList[i].Item2;
+            }
+
+            if (constant)
+            {
+                return "Stały";
+            }
+            else if (decreasing)
+            {
+                return "Malejący";
+            }
+            else if (increasing)
+            {
+                return "Rosnący";
+            }
+            else
+            {
+                return "Nieokreślony";
+            }
         }
     }
 }
+

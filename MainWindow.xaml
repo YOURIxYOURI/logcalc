@@ -27,7 +27,7 @@
 
         <TextBlock Grid.Row="5" Text="wprowadź ciąg arytmetyczny w postaci: a1=2, a2=3..." Margin="10,10,10,10"/>
         <TextBox x:Name="ariProgressTextBox" Grid.Row="6" Height="27" VerticalAlignment="Top" Margin="10,10,10,0" Grid.RowSpan="2"/>
-        <Button Grid.Row="7" Content="sprawdź ciąg" Click="CheckAriButton_Click" Margin="10,67,10,0" Height="24" VerticalAlignment="Top"/>
-        <TextBlock Margin="10,0,10,0" Grid.Row="7" TextWrapping="Wrap" Text="" Height="16" VerticalAlignment="Center" Name="ariResult"/>
+        <Button Grid.Row="7" Content="sprawdź ciąg" Click="CheckAriButton_Click" Margin="10,72,10,0" Height="24" VerticalAlignment="Top"/>
+        <TextBlock Margin="10,37,10,0" Grid.Row="7" TextWrapping="Wrap" Text="" Height="33" VerticalAlignment="Top" Name="ariResult"/>
     </Grid>
 </Window>
