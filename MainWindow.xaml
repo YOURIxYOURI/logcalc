@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Text="Wprowadź równania logarytmiczne w postaci: log(a) lub log_b(a)" Margin="10,10,10,10"/>
+        <TextBlock Grid.Row="1" Text="Wprowadź równania logarytmiczne w postaci: log(a) lub log_b(a), możliwość wykonywania działań na logarytmach" Margin="10,10,10,10"/>
         <TextBox x:Name="EquationsTextBox" Grid.Row="2" Height="27" VerticalAlignment="Top" Margin="10,10,10,0" Grid.RowSpan="2"/>
         <Button Grid.Row="4" Content="Oblicz" Click="CalculateButton_Click" Margin="10,32,10,0" Height="24" VerticalAlignment="Top"/>
         <TextBlock Margin="10,5,10,0" Grid.Row="4" TextWrapping="Wrap" Text="" Height="16" VerticalAlignment="Top" Name="result"/>
